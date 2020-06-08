@@ -34,6 +34,15 @@ export default function InfoSection() {
       <div>
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
+            <img src={pure} alt="pure" className={imageClasses} />
+            <p className={classes.description}>
+              You can write here details about one of your team members. You can
+              give more details about what they do. Feel free to add some{" "}
+              <a href="#pablo">links</a> for people to be able to follow them
+              outside the site.
+            </p>
+          </GridItem>
+          <GridItem xs={12} sm={12} md={4}>
             <img
               src={notTestedOnAnimals}
               alt="notTestedOnAnimals"
@@ -52,15 +61,6 @@ export default function InfoSection() {
               alt="veganFriendly"
               className={imageClasses}
             />
-            <p className={classes.description}>
-              You can write here details about one of your team members. You can
-              give more details about what they do. Feel free to add some{" "}
-              <a href="#pablo">links</a> for people to be able to follow them
-              outside the site.
-            </p>
-          </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
-            <img src={pure} alt="pure" className={imageClasses} />
             <p className={classes.description}>
               You can write here details about one of your team members. You can
               give more details about what they do. Feel free to add some{" "}

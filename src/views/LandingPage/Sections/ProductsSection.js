@@ -56,8 +56,9 @@ export default function ProductsSection(props) {
                               >
                                 <img
                                   src={
+                                    product.images[0] &&
                                     process.env.REACT_APP_S3_BUCKET +
-                                    product.images[0].name
+                                      product.images[0].name
                                   }
                                   alt="..."
                                   className={imageClasses}

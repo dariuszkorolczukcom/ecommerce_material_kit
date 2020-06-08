@@ -26,8 +26,8 @@ const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
   const classes = useStyles();
-  // let isLoading = props.isLoading;
-  // let categorisedProducts = props.categorisedProducts;
+  let isLoading = props.isLoading;
+  let categorisedProducts = props.categorisedProducts;
 
   const dropdownList = [];
 
