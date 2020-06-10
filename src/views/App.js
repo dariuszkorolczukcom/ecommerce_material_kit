@@ -5,7 +5,8 @@ import { useHttpGet } from "../hooks/http";
 import "assets/scss/material-kit-react.scss?v=1.9.0";
 // header
 import Header from "components/Header/Header.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
+import HeaderLinksLeft from "components/Header/HeaderLinks/HeaderLinksLeft.js";
+import HeaderLinksRight from "components/Header/HeaderLinks/HeaderLinksRight.js";
 // footer
 import Footer from "components/Footer/Footer.js";
 //landing
@@ -13,6 +14,8 @@ import LandingPage from "views/LandingPage/LandingPage.js";
 import ProductsSection from "views/LandingPage/Sections/ProductsSection.js";
 // product
 import ProductPage from "views/ProductPage/ProductPage.js";
+// checkout
+import Checkout from "views/Checkout/Checkout.js";
 // FAQ
 import FAQ from "views/FAQ/FAQ.js";
 
@@ -32,7 +35,13 @@ export default function App() {
         routes={dashboardRoutes}
         brand="PinkBubbleBath"
         leftLinks={
-          <HeaderLinks
+          <HeaderLinksLeft
+            categorisedProducts={categorisedProducts}
+            isLoading={isLoading}
+          />
+        }
+        rightLinks={
+          <HeaderLinksRight
             categorisedProducts={categorisedProducts}
             isLoading={isLoading}
           />
@@ -57,6 +66,7 @@ export default function App() {
           )}
         />
         <Route path="/faq" component={FAQ} />
+        <Route path="/checkout" component={Checkout} />
         <Route path="/:id" component={ProductPage} />
       </Switch>
       <Footer />
