@@ -86,8 +86,8 @@ export default function App() {
         }
         fixed
         changeColorOnScroll={{
-          height: 300,
-          color: "primary",
+          height: 200,
+          color: "dark",
         }}
       />
       <Switch>
@@ -106,7 +106,11 @@ export default function App() {
           )}
         />
         <Route exact path="/faq" component={FAQ} />
-        <Route exact path="/checkout" component={Checkout} />
+        <Route
+          exact
+          path="/checkout"
+          component={() => <Checkout cart={cart} />}
+        />
         <Route
           path="/product/:id"
           component={() => (

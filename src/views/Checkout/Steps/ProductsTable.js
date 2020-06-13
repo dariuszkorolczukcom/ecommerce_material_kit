@@ -14,10 +14,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-import { Add, Remove } from "@material-ui/icons";
-
-import Button from "components/CustomButtons/Button.js";
-
 const useStyles = makeStyles({
   list: {
     minWidth: "30%",
@@ -47,7 +43,6 @@ export default function ProductsTable(props) {
             <TableCell align="left">Product</TableCell>
             <TableCell align="right">Qty</TableCell>
             <TableCell align="right">Price</TableCell>
-            <TableCell align="right"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -76,24 +71,6 @@ export default function ProductsTable(props) {
                     <TableCell align="right">
                       £{props.cart[productID] * product.price}
                     </TableCell>
-                    <TableCell align="right">
-                      <Button
-                        style={{ width: ".5rem", height: ".5rem" }}
-                        color="transparent"
-                        onClick={(e) => props.handleAddItemToCart(e, productID)}
-                      >
-                        <Add className={classes.icons} />
-                      </Button>
-                      <Button
-                        style={{ width: "1rem", height: "1rem" }}
-                        color="transparent"
-                        onClick={(e) =>
-                          props.handleDeleteItemFromCart(e, productID)
-                        }
-                      >
-                        <Remove className={classes.icons} />
-                      </Button>
-                    </TableCell>
                   </TableRow>
                 )
               );
@@ -110,6 +87,4 @@ export default function ProductsTable(props) {
 
 ProductsTable.propTypes = {
   cart: PropTypes.object,
-  handleAddItemToCart: PropTypes.func,
-  handleDeleteItemFromCart: PropTypes.func,
 };

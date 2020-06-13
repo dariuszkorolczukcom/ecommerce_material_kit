@@ -26,8 +26,11 @@ export default function ProfilePage() {
 
   return (
     <div>
-      <Parallax small filter image={require("assets/img/soaps/bg1.jpg")} />
-      <div className={classNames(classes.main, classes.mainRaised)}>
+      <Parallax small filter image={require("assets/img/backGround6.jpg")} />
+      <div
+        className={classNames(classes.main, classes.mainRaised)}
+        style={{ backgroundColor: "#f1f1f1" }}
+      >
         <div className={classes.container}>
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={8}>

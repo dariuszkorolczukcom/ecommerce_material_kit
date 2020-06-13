@@ -52,7 +52,10 @@ export default function ProductPage(props) {
           </GridContainer>
         </div>
       </Parallax>
-      <div className={classNames(classes.main, classes.mainRaised)}>
+      <div
+        className={classNames(classes.main, classes.mainRaised)}
+        style={{ backgroundColor: "#f1f1f1" }}
+      >
         <div className={classes.container}>
           <ProductSection
             ebayLink={props.ebayLink}

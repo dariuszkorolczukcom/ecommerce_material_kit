@@ -24,7 +24,7 @@ export default function LandingPage(props) {
 
   return (
     <div>
-      <Parallax filter image={require("assets/img/soaps/bg1.jpg")}>
+      <Parallax filter image={require("assets/img/backGround3.jpg")}>
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
@@ -45,7 +45,10 @@ export default function LandingPage(props) {
           </GridContainer>
         </div>
       </Parallax>
-      <div className={classNames(classes.main, classes.mainRaised)}>
+      <div
+        className={classNames(classes.main, classes.mainRaised)}
+        style={{ backgroundColor: "#f1f1f1" }}
+      >
         <div className={classes.container}>
           <InfoSection />
           {props.children}

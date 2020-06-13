@@ -1,4 +1,6 @@
 import React from "react";
+// nodejs library to set properties for components
+import PropTypes from "prop-types";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 
@@ -12,11 +14,11 @@ import Parallax from "components/Parallax/Parallax.js";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
-import PaypalButton from "./PaypalButton";
+import Stepper from "./Steps/Stepper";
 
 const useStyles = makeStyles(styles);
 
-const Checkout = () => {
+const Checkout = (props) => {
   const classes = useStyles();
   const onSuccess = (payment) => console.log("Successful payment!", payment);
 
@@ -36,24 +38,23 @@ const Checkout = () => {
 
   return (
     <div>
-      <Parallax small filter image={require("assets/img/soaps/bg1.jpg")} />
-      <div className={classNames(classes.main, classes.mainRaised)}>
+      <Parallax small filter image={require("assets/img/backGround4.jpg")} />
+      <div
+        className={classNames(classes.main, classes.mainRaised)}
+        style={{ backgroundColor: "#f1f1f1" }}
+      >
         <div className={classes.container}>
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={8}>
-              <h1 className={classes.title}>Frequently Asked Questions</h1>
-              <div>
-                <PaypalButton
-                  client={CLIENT}
-                  env={ENV}
-                  commit={true}
-                  currency={"GBP"}
-                  total={1}
-                  onSuccess={onSuccess}
-                  onError={onError}
-                  onCancel={onCancel}
-                />
-              </div>
+              <Stepper
+                cart={props.cart}
+                CLIENT={CLIENT}
+                ENV={ENV}
+                total={1}
+                onSuccess={onSuccess}
+                onError={onError}
+                onCancel={onCancel}
+              />
             </GridItem>
           </GridContainer>
         </div>
@@ -63,3 +64,7 @@ const Checkout = () => {
 };
 
 export default Checkout;
+
+Checkout.propTypes = {
+  cart: PropTypes.object,
+};
