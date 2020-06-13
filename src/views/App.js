@@ -3,24 +3,26 @@ import { Route, Switch } from "react-router-dom";
 // http hook
 import { useHttpGet } from "../hooks/http";
 import "assets/scss/material-kit-react.scss?v=1.9.0";
-// header
+
 import Header from "components/Header/Header.js";
 import HeaderLinksLeft from "components/Header/HeaderLinks/HeaderLinksLeft.js";
 import HeaderLinksRight from "components/Header/HeaderLinks/HeaderLinksRight.js";
-import Cart from "components/Cart/Cart.js";
-// footer
+
 import Footer from "components/Footer/Footer.js";
-//landing
+
 import LandingPage from "views/LandingPage/LandingPage.js";
 import ProductsSection from "views/LandingPage/Sections/ProductsSection.js";
-// product
 import ProductPage from "views/ProductPage/ProductPage.js";
-// checkout
 import Checkout from "views/Checkout/Checkout.js";
-// FAQ
 import FAQ from "views/FAQ/FAQ.js";
+import NoMatch from "views/NoMatch";
+
+import Cart from "components/Cart/Cart.js";
 
 const dashboardRoutes = [];
+
+const ebayLink =
+  "https://www.ebay.co.uk/itm/Organic-Loofah-Luffa-Soap-Hand-crafted-various-scents-and-colours/313107319035?hash=item48e6a688fb:m:mp2-hSkBefAn2Y0CCiLT0dQ";
 
 export default function App() {
   const [isLoading, fetchedData] = useHttpGet("products/sorted", []);
@@ -95,6 +97,7 @@ export default function App() {
           component={() => (
             <LandingPage>
               <ProductsSection
+                ebayLink={ebayLink}
                 isLoading={isLoading}
                 categorisedProducts={categorisedProducts}
                 handleAddItemToCart={handleAddItemToCart}
@@ -102,14 +105,20 @@ export default function App() {
             </LandingPage>
           )}
         />
-        <Route path="/faq" component={FAQ} />
-        <Route path="/checkout" component={Checkout} />
+        <Route exact path="/faq" component={FAQ} />
+        <Route exact path="/checkout" component={Checkout} />
         <Route
-          path="/:id"
+          path="/product/:id"
           component={() => (
-            <ProductPage handleAddItemToCart={handleAddItemToCart} />
+            <ProductPage
+              ebayLink={ebayLink}
+              handleAddItemToCart={handleAddItemToCart}
+            />
           )}
         />
+        <Route path="*">
+          <NoMatch />
+        </Route>
       </Switch>
       <Footer />
     </>

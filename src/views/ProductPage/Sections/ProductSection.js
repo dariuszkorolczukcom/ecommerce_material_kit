@@ -16,8 +16,6 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 
-import Badge from "components/Badge/Badge.js";
-
 import styles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
 
 const useStyles = makeStyles(styles);
@@ -52,7 +50,7 @@ export default function ProductSection(props) {
                 <p className={classes.description}>{product.description}</p>
               </CardBody>
               <CardFooter className={classes.justifyCenter}>
-                <a href="https://www.ebay.co.uk/itm/Organic-Loofah-Luffa-Soap-Hand-crafted-various-scents-and-colours/313107319035?hash=item48e6a688fb:m:mp2-hSkBefAn2Y0CCiLT0dQ">
+                <a href={props.ebayLink}>
                   <Button color="primary" className={classes.margin5}>
                     Buy on ebay
                   </Button>
@@ -75,6 +73,7 @@ export default function ProductSection(props) {
 }
 
 ProductSection.propTypes = {
+  ebayLink: PropTypes.string,
   product: PropTypes.object,
   isLoading: PropTypes.bool,
   handleAddItemToCart: PropTypes.func,

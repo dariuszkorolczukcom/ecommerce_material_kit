@@ -2,6 +2,7 @@ import React, { useState } from "react";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // @material-ui/core components
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import { Store, Close } from "@material-ui/icons";
@@ -49,16 +50,16 @@ export default function CustomCart(props) {
         handleAddItemToCart={props.handleAddItemToCart}
         handleDeleteItemFromCart={props.handleDeleteItemFromCart}
       />
-      <Button
-        href="checkout"
+      <Link
+        to="checkout"
         onClick={toggleDrawer(anchor, false)}
-        color="transparent"
         className={classes.navLink}
       >
-        {" "}
-        <Store className={classes.icons} />
-        Go To Checkout
-      </Button>
+        <Button color="success">
+          <Store className={classes.icons} />
+          Go To Checkout
+        </Button>{" "}
+      </Link>
     </div>
   );
 

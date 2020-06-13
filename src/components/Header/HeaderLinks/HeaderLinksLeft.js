@@ -2,6 +2,8 @@
 import React, { useEffect } from "react";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -22,18 +24,18 @@ export default function HeaderLinks(props) {
   let categorisedProducts = props.categorisedProducts;
 
   const dropdownList = [];
-
   const createDropdown = () => {
     props.categorisedProducts.map((category) => {
       if (category.products.length > 0) {
         dropdownList.push(
-          <a
+          <HashLink
             key={category.ID}
-            href={"/#" + category.name.replace(/\s/g, "")}
+            to={"/#"+category.name.replace(/\s/g, "")}
             className={classes.dropdownLink}
+            color="transparent"
           >
             {category.name}
-          </a>
+          </HashLink>
         );
       }
     });
@@ -58,9 +60,9 @@ export default function HeaderLinks(props) {
         />
       </ListItem>
       <ListItem className={classes.listItem}>
-        <Button href="faq" color="transparent" className={classes.navLink}>
+        <NavLink to="/faq" className={classes.navLink}>
           <Help className={classes.icons} /> FAQ
-        </Button>
+        </NavLink>
       </ListItem>
     </List>
   );

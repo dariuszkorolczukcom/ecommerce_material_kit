@@ -74,7 +74,7 @@ export default function ProductsTable(props) {
                     <TableCell align="right">{product.name}</TableCell>
                     <TableCell align="right">{props.cart[productID]}</TableCell>
                     <TableCell align="right">
-                      {props.cart[productID] * product.price}
+                      £{props.cart[productID] * product.price}
                     </TableCell>
                     <TableCell align="right">
                       <Button
@@ -99,8 +99,8 @@ export default function ProductsTable(props) {
               );
             })}
           <TableRow>
-            <TableCell>Sum</TableCell>
-            <TableCell>{cartPrice}</TableCell>
+            <TableCell>To pay: </TableCell>
+            <TableCell>£{cartPrice}</TableCell>
           </TableRow>
         </TableBody>
       </Table>

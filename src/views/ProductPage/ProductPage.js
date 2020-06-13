@@ -55,6 +55,7 @@ export default function ProductPage(props) {
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
           <ProductSection
+            ebayLink={props.ebayLink}
             isLoading={isLoading}
             product={product}
             handleAddItemToCart={props.handleAddItemToCart}
@@ -66,5 +67,6 @@ export default function ProductPage(props) {
 }
 
 ProductPage.propTypes = {
+  ebayLink: PropTypes.string,
   handleAddItemToCart: PropTypes.func,
 };
