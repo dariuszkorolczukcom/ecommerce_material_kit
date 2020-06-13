@@ -60,7 +60,15 @@ export default function Header(props) {
     [classes.absolute]: absolute,
     [classes.fixed]: fixed,
   });
-  const brandComponent = <Button className={classes.title}>{brand}</Button>;
+  const brandComponent = (
+    <a
+      style={{ fontDecoration: "none", color: "white" }}
+      href="/"
+      className={classes.dropdownLink}
+    >
+      <Button className={classes.title}>{brand}</Button>
+    </a>
+  );
   return (
     <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>
@@ -86,6 +94,7 @@ export default function Header(props) {
             <Menu />
           </IconButton>
         </Hidden>
+        <div>{props.cart}</div>
       </Toolbar>
       <Hidden mdUp implementation="js">
         <Drawer
@@ -125,6 +134,7 @@ Header.propTypes = {
   ]),
   rightLinks: PropTypes.node,
   leftLinks: PropTypes.node,
+  cart: PropTypes.node,
   brand: PropTypes.string,
   fixed: PropTypes.bool,
   absolute: PropTypes.bool,

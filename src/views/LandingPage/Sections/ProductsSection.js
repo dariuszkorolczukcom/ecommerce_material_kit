@@ -67,8 +67,7 @@ export default function ProductsSection(props) {
                             </a>
                             <h4 className={classes.cardTitle}>
                               {product.name}
-                              <br />
-                              <Badge color="info">£{product.price}</Badge>
+                              <br />£{product.price}
                             </h4>
                             <CardBody>
                               <p className={classes.description}>
@@ -84,6 +83,15 @@ export default function ProductsSection(props) {
                                   Buy on ebay
                                 </Button>
                               </a>
+                              <Button
+                                color="primary"
+                                className={classes.margin5}
+                                onClick={(e) =>
+                                  props.handleAddItemToCart(e, product.ID)
+                                }
+                              >
+                                Add to cart
+                              </Button>
                             </CardFooter>
                           </Card>
                         </GridItem>
@@ -102,4 +110,5 @@ export default function ProductsSection(props) {
 ProductsSection.propTypes = {
   categorisedProducts: PropTypes.array,
   isLoading: PropTypes.bool,
+  handleAddItemToCart: PropTypes.func,
 };

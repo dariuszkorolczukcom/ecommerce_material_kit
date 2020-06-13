@@ -6,10 +6,7 @@ import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
-// // http hook
-// import { useHttpGet } from "../../../hooks/http";
-// // router hook
-// import { useParams } from "react-router-dom";
+import { AddShoppingCart } from "@material-ui/icons";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
@@ -26,12 +23,8 @@ import styles from "assets/jss/material-kit-react/views/landingPageSections/team
 const useStyles = makeStyles(styles);
 
 export default function ProductSection(props) {
-  // let { id } = useParams();
-  // const [isLoading, fetchedData] = useHttpGet("product/" + id, [id]);
   let product = props.product;
   let isLoading = props.isLoading;
-
-  // if (fetchedData !== null) product = fetchedData.data;
 
   const classes = useStyles();
   const imageClasses = classNames(classes.imgCard);
@@ -50,8 +43,7 @@ export default function ProductSection(props) {
             <Card plain>
               <h4 className={classes.cardTitle}>
                 {product.name}
-                <br />
-                <Badge color="info">£{product.price}</Badge>
+                <br />£{product.price}
               </h4>
               <CardBody>
                 <p className={classes.description}>
@@ -65,6 +57,14 @@ export default function ProductSection(props) {
                     Buy on ebay
                   </Button>
                 </a>
+                <Button
+                  color="primary"
+                  className={classes.margin5}
+                  onClick={(e) => props.handleAddItemToCart(e, product.ID)}
+                >
+                  <AddShoppingCart className={classes.icons} />
+                  Add to cart
+                </Button>
               </CardFooter>
             </Card>
           </GridItem>
@@ -77,4 +77,5 @@ export default function ProductSection(props) {
 ProductSection.propTypes = {
   product: PropTypes.object,
   isLoading: PropTypes.bool,
+  handleAddItemToCart: PropTypes.func,
 };
