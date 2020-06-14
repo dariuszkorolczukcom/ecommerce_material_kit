@@ -3,8 +3,6 @@ import React from "react";
 import PropTypes from "prop-types";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-// http hook
-import { useHttpGet } from "../../../hooks/http";
 import Avatar from "@material-ui/core/Avatar";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -28,11 +26,7 @@ export default function ProductsTable(props) {
   const classes = useStyles();
 
   let cartPrice = 0;
-  let products = [];
-
-  const [isLoading, fetchedData] = useHttpGet("products", []);
-
-  if (fetchedData !== null) products = fetchedData.data;
+  let products = props.products;
 
   return (
     <TableContainer component={Paper}>
@@ -46,14 +40,16 @@ export default function ProductsTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {!isLoading &&
+          {!props.isLoading &&
             Object.keys(props.cart).map((productID) => {
               let product = products.find(
                 (product) => product.ID === parseInt(productID)
               );
-              if (product !== undefined)
-                cartPrice += props.cart[productID] * product.price;
-
+              let productPrice = 0;
+              if (product !== undefined) {
+                productPrice = props.cart[productID] * product.price;
+                cartPrice += productPrice;
+              }
               return (
                 product !== undefined && (
                   <TableRow key={product.name}>
@@ -69,7 +65,7 @@ export default function ProductsTable(props) {
                     <TableCell align="right">{product.name}</TableCell>
                     <TableCell align="right">{props.cart[productID]}</TableCell>
                     <TableCell align="right">
-                      £{props.cart[productID] * product.price}
+                      £{(productPrice / 100).toFixed(2)}
                     </TableCell>
                   </TableRow>
                 )
@@ -77,7 +73,7 @@ export default function ProductsTable(props) {
             })}
           <TableRow>
             <TableCell>To pay: </TableCell>
-            <TableCell>£{cartPrice}</TableCell>
+            <TableCell>£{(cartPrice / 100).toFixed(2)}</TableCell>
           </TableRow>
         </TableBody>
       </Table>
@@ -87,4 +83,6 @@ export default function ProductsTable(props) {
 
 ProductsTable.propTypes = {
   cart: PropTypes.object,
+  products: PropTypes.array,
+  isLoading: PropTypes.bool,
 };

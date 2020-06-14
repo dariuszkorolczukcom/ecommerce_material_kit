@@ -41,7 +41,7 @@ export default function ProductSection(props) {
             <Card plain>
               <h4 className={classes.cardTitle}>
                 {product.name}
-                <br />£{product.price}
+                <br />£{product.price / 100}
               </h4>
               <CardBody>
                 <p className={classes.description}>

@@ -67,7 +67,7 @@ export default function ProductsSection(props) {
                             </Link>
                             <h4 className={classes.cardTitle}>
                               {product.name}
-                              <br />£{product.price}
+                              <br />£{(product.price / 100).toFixed(2)}
                             </h4>
                             <CardBody>
                               <p className={classes.description}>

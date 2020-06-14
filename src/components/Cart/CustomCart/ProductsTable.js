@@ -56,9 +56,11 @@ export default function ProductsTable(props) {
               let product = products.find(
                 (product) => product.ID === parseInt(productID)
               );
-              if (product !== undefined)
-                cartPrice += props.cart[productID] * product.price;
-
+              let productPrice = 0;
+              if (product !== undefined) {
+                productPrice = props.cart[productID] * product.price;
+                cartPrice += productPrice;
+              }
               return (
                 product !== undefined && (
                   <TableRow key={product.name}>
@@ -74,7 +76,7 @@ export default function ProductsTable(props) {
                     <TableCell align="right">{product.name}</TableCell>
                     <TableCell align="right">{props.cart[productID]}</TableCell>
                     <TableCell align="right">
-                      £{props.cart[productID] * product.price}
+                      £{(productPrice / 100).toFixed(2)}
                     </TableCell>
                     <TableCell align="right">
                       <Button
@@ -100,7 +102,7 @@ export default function ProductsTable(props) {
             })}
           <TableRow>
             <TableCell>To pay: </TableCell>
-            <TableCell>£{cartPrice}</TableCell>
+            <TableCell>£{cartPrice / 100}</TableCell>
           </TableRow>
         </TableBody>
       </Table>

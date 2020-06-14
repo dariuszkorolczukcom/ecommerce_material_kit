@@ -20,7 +20,6 @@ const useStyles = makeStyles(styles);
 
 const Checkout = (props) => {
   const classes = useStyles();
-  const onSuccess = (payment) => console.log("Successful payment!", payment);
 
   const CLIENT = {
     sandbox:
@@ -51,7 +50,6 @@ const Checkout = (props) => {
                 CLIENT={CLIENT}
                 ENV={ENV}
                 total={1}
-                onSuccess={onSuccess}
                 onError={onError}
                 onCancel={onCancel}
               />

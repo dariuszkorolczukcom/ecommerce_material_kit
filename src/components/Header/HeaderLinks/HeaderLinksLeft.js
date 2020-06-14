@@ -26,11 +26,12 @@ export default function HeaderLinks(props) {
   const dropdownList = [];
   const createDropdown = () => {
     props.categorisedProducts.map((category) => {
+      console.log(category);
       if (category.products.length > 0) {
         dropdownList.push(
           <HashLink
             key={category.ID}
-            to={"/#"+category.name.replace(/\s/g, "")}
+            to={"/#" + category.name.replace(/\s/g, "")}
             className={classes.dropdownLink}
             color="transparent"
           >

@@ -14,7 +14,11 @@ export default function Step2(props) {
         Summary:
       </GridItem>
       <GridItem>
-        <ProductsTable cart={props.cart} />
+        <ProductsTable
+          cart={props.cart}
+          products={props.products}
+          isLoading={props.isLoading}
+        />
       </GridItem>
       <GridItem xs={12} sm={12} md={4}>
         Delivery Address:
@@ -29,4 +33,6 @@ export default function Step2(props) {
 Step2.propTypes = {
   cart: PropTypes.object,
   address: PropTypes.object,
+  products: PropTypes.array,
+  isLoading: PropTypes.bool,
 };

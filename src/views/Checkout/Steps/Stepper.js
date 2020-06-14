@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
+// http hook
+import { useHttpGet } from "../../../hooks/http";
 import { makeStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
@@ -84,23 +86,54 @@ export default function HorizontalNonLinearStepper(props) {
   const [activeStep, setActiveStep] = useState(0);
   const [address, setAddress] = useState(initialAddress);
   const steps = getSteps();
+  let products = [];
+
+  const [isLoading, fetchedData] = useHttpGet("products", []);
+
+  if (fetchedData !== null) products = fetchedData.data;
 
   const onChange = (e) => {
     console.log();
     let addressTemp = address;
     addressTemp[e.target.name].value = e.target.value;
     setAddress(addressTemp);
-    console.log(address);
   };
+
+  const getPrice = () => {
+    let cartPrice = 0;
+    if (props.cart)
+      Object.keys(props.cart).map((productID) => {
+        let product = products.find(
+          (product) => product.ID === parseInt(productID)
+        );
+        let productPrice = 0;
+        if (product !== undefined) {
+          productPrice = props.cart[productID] * product.price;
+          cartPrice += productPrice / 100;
+        }
+      });
+    return cartPrice.toString();
+  };
+  let cartPrice = getPrice();
+  console.log("price: " + cartPrice);
 
   const getStepContent = (step) => {
     switch (step) {
       case 0:
         return <Step1 address={address} onChange={onChange} />;
       case 1:
-        return <Step2 cart={props.cart} address={address} />;
+        return (
+          <Step2
+            cart={props.cart}
+            address={address}
+            products={products}
+            isLoading={isLoading}
+          />
+        );
       case 2:
-        return <Step3 />;
+        return (
+          <Step3 address={address} products={products} cart={props.cart} />
+        );
       default:
         return "Unknown step";
     }
@@ -123,7 +156,7 @@ export default function HorizontalNonLinearStepper(props) {
       >
         {steps.map((label) => (
           <Step key={label}>
-            <StepButton>{label}</StepButton>
+            <StepButton disabled>{label}</StepButton>
           </Step>
         ))}
       </Stepper>
@@ -155,7 +188,7 @@ export default function HorizontalNonLinearStepper(props) {
               </div>
             )}{" "}
             {activeStep === 1 && (
-              <div style={{ float: "left" }}>
+              <div style={{ float: "left", marginTop: "5px" }}>
                 <PaypalButton
                   className={classes.button}
                   style={{ float: "left" }}
@@ -163,9 +196,8 @@ export default function HorizontalNonLinearStepper(props) {
                   env={props.ENV}
                   commit={true}
                   currency={"GBP"}
-                  total={1}
+                  total={cartPrice}
                   onSuccess={() => {
-                    props.onSuccess();
                     handleNext();
                   }}
                   onError={props.onError}

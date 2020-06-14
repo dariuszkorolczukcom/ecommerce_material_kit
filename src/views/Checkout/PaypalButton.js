@@ -109,7 +109,7 @@ PaypalButton.propTypes = {
   isScriptLoaded: PropTypes.bool,
   isScriptLoadSucceed: PropTypes.bool,
   env: PropTypes.string,
-  total: PropTypes.number,
+  total: PropTypes.string,
   currency: PropTypes.string,
   commit: PropTypes.bool,
   client: PropTypes.object,
