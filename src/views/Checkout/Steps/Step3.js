@@ -40,7 +40,7 @@ export default function Step3(props) {
     });
     return orderSummary;
   };
-  const [isReceiptLoaded, fetchedReceipt] = useHttpPost(
+  const [isReceiptLoading, fetchedReceipt] = useHttpPost(
     "guest_order",
     [],
     createSummary()
@@ -49,7 +49,9 @@ export default function Step3(props) {
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} md={4}>
-        {isReceiptLoaded && fetchedReceipt != null && fetchedReceipt.ID}
+        {console.log("fetchedReceipt")}
+        {console.log(fetchedReceipt)}
+        {!isReceiptLoading && fetchedReceipt != null && <div>Hello! {fetchedReceipt.ID}</div>}
       </GridItem>
     </GridContainer>
   );

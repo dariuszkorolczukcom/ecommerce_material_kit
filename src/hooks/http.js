@@ -45,14 +45,14 @@ export const useHttpPost = (url, dependencies, obj) => {
     axios
       .post("http://localhost:8080/" + url, obj, headers)
       .then((response) => {
-        if (!response.ok) {
+        if (response.status !== 200) {
           throw new Error("Failed to fetch.");
         }
-        return response.json();
+        return response;
       })
       .then((data) => {
         setIsLoading(false);
-        setFetchedData(data);
+        setFetchedData(data.data);
       })
       .catch((err) => {
         console.log(err);
