@@ -23,6 +23,7 @@
     "react-swipeable-views": "0.13.9"
   },
   "devDependencies": {
+    "@babel/core":"^7.0.0-0",
     "@babel/cli": "7.10.1",
     "@babel/plugin-proposal-class-properties": "7.10.1",
     "@babel/preset-env": "7.10.1",
