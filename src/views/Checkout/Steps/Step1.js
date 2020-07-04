@@ -9,6 +9,7 @@ import GridItem from "components/Grid/GridItem.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 
 export default function Step1(props) {
+  //https://api.getAddress.io/find/
   return (
     <GridContainer>
       {Object.keys(props.address).map((key) => {
@@ -21,7 +22,9 @@ export default function Step1(props) {
                 fullWidth: true,
               }}
               value={props.address[key].value}
-              // error
+              error={
+                !props.address[key].validate(props.address[key].value)
+              }
               inputProps={{
                 endAdornment: (
                   <InputAdornment position="end">

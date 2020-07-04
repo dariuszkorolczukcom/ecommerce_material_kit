@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // http hook
@@ -21,6 +21,8 @@ import Home from "@material-ui/icons/Home";
 import Apartment from "@material-ui/icons/Apartment";
 import Mail from "@material-ui/icons/Mail";
 import LocationCity from "@material-ui/icons/LocationCity";
+import useDeepCompareEffect from 'use-deep-compare-effect'
+
 
 const initialAddress = {
   Name: {
@@ -28,36 +30,67 @@ const initialAddress = {
     value: "",
     required: true,
     icon: <Person />,
+    validate: (v) => {
+      console.log(v.length > 0 && v.length < 50)
+      return v.length > 0 && v.length < 50
+    }
   },
   Email: {
     name: "Email",
     value: "",
     required: true,
     icon: <AlternateEmail />,
+    validate: (email) => {
+      console.log(email)
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase())
+    }
   },
   AddresLine1: {
     name: "First Line Of Address",
     value: "",
     required: true,
     icon: <Home />,
+    validate: (v) => {
+      console.log(v.length > 0 && v.length < 50)
+      return v.length > 0 && v.length < 50
+    }
   },
   AddresLine2: {
+    minLength:0,
+    maxLength: 50,
     name: "Second Line Of Address",
     value: "",
     required: false,
     icon: <Apartment />,
+    validate: (v) => {
+      console.log(v.length > 0 && v.length < 50)
+      return v.length > 0 && v.length < 50
+    }
   },
   PostCode: {
+    minLength:1,
+    maxLength: 10,
     name: "Post Code",
     value: "",
     required: true,
     icon: <Mail />,
+    validate: (v) => {
+      console.log(v.length > 0 && v.length < 50)
+      return v.length > 0 && v.length < 50
+    }
   },
   Town: {
+    minLength:1,
+    maxLength: 50,
     name: "Town",
     value: "",
     required: true,
     icon: <LocationCity />,
+    validate: (v) => {
+      console.log(v.length > 0 && v.length < 50)
+      return v.length > 0 && v.length < 50
+    }
   },
 };
 
@@ -87,6 +120,10 @@ export default function HorizontalNonLinearStepper(props) {
   const [address, setAddress] = useState(initialAddress);
   const steps = getSteps();
   let products = [];
+
+  useDeepCompareEffect(() => {
+    setAddress(address)
+  }, [address])
 
   const [isLoading, fetchedData] = useHttpGet("products", []);
 

@@ -13,7 +13,7 @@ export const useHttpGet = (url, dependencies) => {
     setIsLoading(true);
     console.log("Sending Http request to URL: " + url);
     axios
-      .get("http://localhost:8080/" + url, headers)
+      .get(process.env.REACT_APP_GO_API + url, headers)
       .then((response) => {
         console.log(response);
         if (!response.status === 200) {
@@ -43,7 +43,7 @@ export const useHttpPost = (url, dependencies, obj) => {
     console.log("Sending Http request to URL: " + url);
     console.log("With POST data: " + JSON.stringify(obj));
     axios
-      .post("http://localhost:8080/" + url, obj, headers)
+      .post(process.env.REACT_APP_GO_API + url, obj, headers)
       .then((response) => {
         if (response.status !== 200) {
           throw new Error("Failed to fetch.");

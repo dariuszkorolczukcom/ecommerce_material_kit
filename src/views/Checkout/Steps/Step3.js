@@ -38,6 +38,7 @@ export default function Step3(props) {
         });
       }
     });
+    localStorage.setItem("cart", JSON.stringify({}))
     return orderSummary;
   };
   const [isReceiptLoading, fetchedReceipt] = useHttpPost(
@@ -51,7 +52,9 @@ export default function Step3(props) {
       <GridItem xs={12} sm={12} md={4}>
         {console.log("fetchedReceipt")}
         {console.log(fetchedReceipt)}
-        {!isReceiptLoading && fetchedReceipt != null && <div>Hello! {fetchedReceipt.ID}</div>}
+        {!isReceiptLoading && fetchedReceipt != null && 
+          <div>Your order was processed successfully!<br/> 
+          Your order id:<br/> <b>{fetchedReceipt.ID}</b> </div>}
       </GridItem>
     </GridContainer>
   );
