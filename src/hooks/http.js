@@ -3,6 +3,7 @@ import axios from "axios";
 
 const headers = {
   "Access-Control-Allow-Origin": "*",
+  "Accept": "*/*",
 };
 
 export const useHttpGet = (url, dependencies) => {
