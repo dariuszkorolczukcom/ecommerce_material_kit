@@ -41,7 +41,7 @@ export default function Footer(props) {
           >
             Dariusz Korolczuk
           </a>
-          1.1.0
+          - v1.1.1
         </div>
       </div>
     </footer>
