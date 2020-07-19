@@ -1,4 +1,6 @@
 import React from "react";
+// nodejs library to set properties for components
+import PropTypes from "prop-types";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -22,7 +24,7 @@ import ProductSection from "./Sections/ProductSection.js";
 
 const useStyles = makeStyles(styles);
 
-export default function ProductPage() {
+export default function ProductPage(props) {
   const classes = useStyles();
 
   let { id } = useParams();
@@ -50,11 +52,24 @@ export default function ProductPage() {
           </GridContainer>
         </div>
       </Parallax>
-      <div className={classNames(classes.main, classes.mainRaised)}>
+      <div
+        className={classNames(classes.main, classes.mainRaised)}
+        style={{ backgroundColor: "#f1f1f1" }}
+      >
         <div className={classes.container}>
-          <ProductSection isLoading={isLoading} product={product} />
+          <ProductSection
+            ebayLink={props.ebayLink}
+            isLoading={isLoading}
+            product={product}
+            handleAddItemToCart={props.handleAddItemToCart}
+          />
         </div>
       </div>
     </div>
   );
 }
+
+ProductPage.propTypes = {
+  ebayLink: PropTypes.string,
+  handleAddItemToCart: PropTypes.func,
+};
